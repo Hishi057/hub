@@ -33,7 +33,7 @@ export default {
       title: "リーダーモード",
     },
     explorer: {
-      title: "エクスプローラー",
+      title: "記事一覧",
     },
     footer: {
       createdWith: "作成",

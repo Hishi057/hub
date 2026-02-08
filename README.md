@@ -1,17 +1,9 @@
-# Quartz v4
+# Hishi057-notes
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+勉強した内容をまとめて後から見返すためのリポジトリ。
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+高校生まではあまりまとめノートとか作らない人間だったけど、大学生になって学ぶ量が膨大になってきたせいで、一々教科書を開かずとも過去に勉強した内容に効率良くアクセスする手段が必要になってきた。
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+## 編集方法(自分用)
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
-
-## Sponsors
-
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+`npx quartz build --serve` でローカルサーバー起動
