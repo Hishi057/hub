@@ -20,6 +20,8 @@ export default {
       bug: "Klaida",
       example: "Pavyzdys",
       quote: "Citata",
+      definition: "Citata",
+      theorem: "Citata",
     },
     backlinks: {
       title: "Atgalinės Nuorodos",

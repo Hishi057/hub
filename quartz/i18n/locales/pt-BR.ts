@@ -20,6 +20,8 @@ export default {
       bug: "Bug",
       example: "Exemplo",
       quote: "Citação",
+      definition: "Citação",
+      theorem: "Citação",
     },
     backlinks: {
       title: "Backlinks",

@@ -20,6 +20,8 @@ export default {
       bug: "Błąd w kodzie",
       example: "Przykład",
       quote: "Cytat",
+      definition: "Cytat",
+      theorem: "Cytat",
     },
     backlinks: {
       title: "Odnośniki zwrotne",

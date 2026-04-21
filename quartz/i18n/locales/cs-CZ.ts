@@ -20,6 +20,8 @@ export default {
       bug: "Bug",
       example: "Příklad",
       quote: "Citace",
+      definition: "Citace",
+      theorem: "Citace",
     },
     backlinks: {
       title: "Příchozí odkazy",

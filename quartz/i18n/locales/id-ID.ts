@@ -20,6 +20,8 @@ export default {
       bug: "Bug",
       example: "Contoh",
       quote: "Kutipan",
+      definition: "Kutipan",
+      theorem: "Kutipan",
     },
     backlinks: {
       title: "Tautan Balik",

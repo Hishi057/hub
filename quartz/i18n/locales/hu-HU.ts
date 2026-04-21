@@ -20,6 +20,8 @@ export default {
       bug: "Bug",
       example: "Példa",
       quote: "Idézet",
+      definition: "Idézet",
+      theorem: "Idézet",
     },
     backlinks: {
       title: "Visszautalások",

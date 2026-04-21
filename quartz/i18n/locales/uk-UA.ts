@@ -20,6 +20,8 @@ export default {
       bug: "Баг",
       example: "Приклад",
       quote: "Цитата",
+      definition: "Цитата",
+      theorem: "Цитата",
     },
     backlinks: {
       title: "Зворотні посилання",

@@ -20,6 +20,8 @@ export default {
       bug: "บั๊ก",
       example: "ตัวอย่าง",
       quote: "คำพูกยกมา",
+      definition: "คำพูกยกมา",
+      theorem: "คำพูกยกมา",
     },
     backlinks: {
       title: "หน้าที่กล่าวถึง",

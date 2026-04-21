@@ -105,10 +105,24 @@
     --callout-icon: var(--callout-icon-danger);
   }
 
+  &[data-callout="definition"] {
+    --color: #448aff;
+    --border: #448aff44;
+    --bg: #2872f110;
+    --callout-icon: var(--callout-icon-note);
+  }
+
+  &[data-callout="theorem"] {
+    --color: #9dc8ff;
+    --border: #7eadff44;
+    --bg: #91cdff10;
+    --callout-icon: var(--callout-icon-example);
+  }
+
   &[data-callout="example"] {
-    --color: #7a43b5;
-    --border: #7a43b544;
-    --bg: #7a43b510;
+    --color: #e8915f;
+    --border: #e8915f44;
+    --bg: #e8915f10;
     --callout-icon: var(--callout-icon-example);
   }
 

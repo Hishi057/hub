@@ -20,6 +20,8 @@ export default {
       bug: "버그",
       example: "예시",
       quote: "인용",
+      definition: "인용",
+      theorem: "인용",
     },
     backlinks: {
       title: "백링크",

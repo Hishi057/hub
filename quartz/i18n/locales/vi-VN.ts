@@ -20,6 +20,8 @@ export default {
       bug: "Lỗi",
       example: "Ví dụ",
       quote: "Trích dẫn",
+      definition: "Trích dẫn",
+      theorem: "Trích dẫn",
     },
     backlinks: {
       title: "Liên kết ngược",

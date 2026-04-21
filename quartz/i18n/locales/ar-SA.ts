@@ -21,6 +21,8 @@ export default {
       bug: "خلل",
       example: "مثال",
       quote: "اقتباس",
+      definition: "اقتباس",
+      theorem: "اقتباس",
     },
     backlinks: {
       title: "وصلات العودة",

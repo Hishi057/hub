@@ -21,6 +21,8 @@ export default {
       bug: "باگ",
       example: "مثال",
       quote: "نقل قول",
+      definition: "نقل قول",
+      theorem: "نقل قول",
     },
     backlinks: {
       title: "بک‌لینک‌ها",

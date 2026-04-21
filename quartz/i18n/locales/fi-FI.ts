@@ -20,6 +20,8 @@ export default {
       bug: "Virhe",
       example: "Esimerkki",
       quote: "Lainaus",
+      definition: "Lainaus",
+      theorem: "Lainaus",
     },
     backlinks: {
       title: "Takalinkit",

@@ -20,6 +20,8 @@ export default {
       bug: "Hata",
       example: "Örnek",
       quote: "Alıntı",
+      definition: "Alıntı",
+      theorem: "Alıntı",
     },
     backlinks: {
       title: "Backlinkler",

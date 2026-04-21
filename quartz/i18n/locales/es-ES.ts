@@ -20,6 +20,8 @@ export default {
       bug: "Error",
       example: "Ejemplo",
       quote: "Cita",
+      definition: "Cita",
+      theorem: "Cita",
     },
     backlinks: {
       title: "Retroenlaces",

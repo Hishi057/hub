@@ -20,6 +20,8 @@ export default {
       bug: "Қате",
       example: "Мысал",
       quote: "Дәйексөз",
+      definition: "Дәйексөз",
+      theorem: "Дәйексөз",
     },
     backlinks: {
       title: "Артқа сілтемелер",

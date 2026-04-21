@@ -21,6 +21,8 @@ export default {
       bug: "באג",
       example: "דוגמה",
       quote: "ציטוט",
+      definition: "ציטוט",
+      theorem: "ציטוט",
     },
     backlinks: {
       title: "קישורים חוזרים",

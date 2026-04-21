@@ -20,6 +20,8 @@ export default {
       bug: "錯誤",
       example: "範例",
       quote: "引用",
+      definition: "引用",
+      theorem: "引用",
     },
     backlinks: {
       title: "反向連結",
