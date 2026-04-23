@@ -147,6 +147,12 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
             const isRealFile = pageData.filePath !== undefined
             let userDefinedOgImagePath = pageData.frontmatter?.socialImage
 
+            // Check if article contains images
+            const pageContent = pageData.body || ""
+            const hasImages =
+              /!\[.*?\]\(.*?\)/.test(pageContent) || // Markdown image syntax
+              /<img[^>]*>/i.test(pageContent) // HTML img tag
+
             if (userDefinedOgImagePath) {
               userDefinedOgImagePath = isAbsoluteURL(userDefinedOgImagePath)
                 ? userDefinedOgImagePath
@@ -159,6 +165,12 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
             const defaultOgImagePath = `https://${baseUrl}/static/og-image.png`
             const ogImagePath = userDefinedOgImagePath ?? generatedOgImagePath ?? defaultOgImagePath
             const ogImageMimeType = `image/${getFileExtension(ogImagePath) ?? "png"}`
+
+            // Only render og:image meta tags if the page has images or has user-defined image
+            if (!hasImages && !userDefinedOgImagePath && generatedOgImagePath) {
+              return <></>
+            }
+
             return (
               <>
                 {!userDefinedOgImagePath && (

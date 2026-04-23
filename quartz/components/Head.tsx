@@ -31,6 +31,12 @@ export default (() => {
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
+    // Check if article contains images
+    const articleContent = fileData.body || ""
+    const hasImages =
+      /!\[.*?\]\(.*?\)/.test(articleContent) || // Markdown image syntax
+      /<img[^>]*>/i.test(articleContent) // HTML img tag
+
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
       (e) => e.name === CustomOgImagesEmitterName,
     )
@@ -62,7 +68,7 @@ export default (() => {
         <meta property="og:description" content={description} />
         <meta property="og:image:alt" content={description} />
 
-        {!usesCustomOgImage && (
+        {!usesCustomOgImage && hasImages && (
           <>
             <meta property="og:image" content={ogImageDefaultPath} />
             <meta property="og:image:url" content={ogImageDefaultPath} />
@@ -71,6 +77,12 @@ export default (() => {
               property="og:image:type"
               content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
             />
+          </>
+        )}
+
+        {usesCustomOgImage && hasImages && (
+          <>
+            <meta property="og:image:type" content="image/.webp" />
           </>
         )}
 

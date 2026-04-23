@@ -1,6 +1,5 @@
 ---
 title: 基礎
-socialImage: "assets/transformer_model_architecture.png"
 ---
 
 ニューラルネットワーク,RNN, Attention, Transformerなど、昨今のAIを語る上で欠かせない基礎的な部分についてまとめていきます。
