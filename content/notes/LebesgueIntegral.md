@@ -60,3 +60,55 @@ title: ルベーグ積分論
 > 特に $B = \mathbb{R} $ のとき
 >
 > $$\mu^*\left(\bigcup\limits_{k=1}^{n} A_k\right) = \sum\limits_{k=1}^{n}{ \mu^*(A_k) }$$
+
+> [!theorem] 加算無限和と加算共通部分
+> 無限個の可測な集合の和と積も可測
+
+**自明ではない**！
+
+証明のアイデアは次の通りである。
+
+無限個の可測な集合群$\{A_n\}$を考える。この無限和を$A$とし続けながら
+集合群を互いに素となるように切り分ける。
+
+$$
+
+\begin{align*}
+\mu^*(B) &= \sum{ \mu^*(B\cap A_n) } + \mu^*(B \cap A^c) \\
+&\geq \mu^*(B \cap \bigcup A_n) + \mu^*(B \cap A^c) \\
+&= \mu^*(B \cap A) + \mu^*(B \cap A^c)
+\end{align*}
+
+$$
+
+$\leq$については加算劣加法性より常に成り立つため、$A$が可測であることは示された。
+否定をとってドモルガンの法則を使えば、無限積についても可測であることが示される。
+
+> [!theorem] 加算加法性
+> $$\mu^*\left(\bigcup\limits_{k=1}^{\infty} A_k\right) = \sum\limits_{k=1}^{\infty}{ \mu^*(A_k) }$$
+
+$n$が有限の場合は先ほど証明したが、無限でも成り立つ。
+
+$$\mu^*(A) \geq \mu^*(\bigcup\limits_{k=1}^{n} A_k) = \sum\limits_{k=1}^{n}\mu^*(A_k) $$
+
+とすれば、$\leq$については自動的に成り立つので、$n$を無限に飛ばして挟むことで証明完了
+
+### テクニック
+
+- ルベーグ積分論の文脈において、集合$A$は常に $\mu^*(B) \leq \mu^*{(B \cap A)} + \mu^*{(B \cap A^c)}$ が成り立っているので、$\mu^*(B) \geq \mu^*{(B \cap A)} + \mu^*{(B \cap A^c)}$ を示して可測であることを示すパターンが多い
+
+## 有限加法族, σ-加法族
+
+> [!definition] 定義：有限加法族, σ-加法族
+>
+> 1. $\mathbb{ \emptyset ,R} \in \mathcal{A}$
+> 2. $A \in \mathcal{A} \implies A^c \in \mathcal{A}$
+> 3. $A_1, A_2 \in \mathcal{A} \implies A_1 \cup A_2 \in \mathcal{A}$
+> 4. $A_1, A_2 \cdots \in \mathcal{A} \implies \bigcup\limits_{i \geq 1} A_i \in \mathcal{A}$
+>
+> 条件1,2,3を満たすとき、集合族$\mathcal{A}$を有限加法族であるという。  
+> 条件1,2,4を満たす時、集合族$\mathcal{A}$を$\sigma$-加法族であるという。
+
+扱う対象が、既存の知っているルールで分析できるものであることを保証するためのもの。という風に解釈した。
+特に、「∞」が含まれていても、既存の代数のルールが適用が変わらず適用できることを保証できることが嬉しい。
+のだと思う。
