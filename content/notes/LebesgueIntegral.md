@@ -13,8 +13,9 @@ title: ルベーグ積分論
 ## ルベーグ外測度
 
 > [!definition] 定義：ルベーグ外測度
-> $\mu^*(A) \coloneqq \inf \sum\limits_{n=1}^\infty {|I_n|}$
->
+> $$
+> \mu^*(A) \coloneqq \inf \sum\limits_{n=1}^\infty {|I_n|}
+> $$
 > ただし、区間 $I_n = [a_n,b_n)$ の集合は集合 $A$ を被覆する。
 
 **解釈**：多少はみ出ても、とりあえず大きさなるものを定義したいらしい。これを元に、**ルベーグ測度**というちゃんとしたやつを定義していく。
@@ -22,10 +23,14 @@ title: ルベーグ積分論
 ### 重要な性質
 
 > [!theorem] 単調性
-> $$A \subset B \implies \mu^*(A) \leq \mu^*(B)$$
+> $$
+> A \subset B \implies \mu^*(A) \leq \mu^*(B)
+> $$
 
 > [!theorem] 加算劣加法性
-> $$\mu^*(A \cup B) \leq \mu^*(A) + \mu^*(B)$$
+> $$
+> \mu^*(A \cup B) \leq \mu^*(A) + \mu^*(B)
+> $$
 > （3つ以上の集合についても同様のことが成り立つ）
 
 **注意**：$A \cap B = \emptyset$ ならば、常に等式が成り立つわけではない。しかしながら、そんな集合は変なので、これが成り立つやつだけを考えましょうという動機で生まれたのが後述する**ルベーグ測度**である。
@@ -36,12 +41,10 @@ title: ルベーグ積分論
 
 > [!definition] 定義：ルベーグ測度
 > 集合 $A \in 2^\mathbb{R}$ が **可測** であるとは、任意の集合 $B \in 2^\mathbb{R}$ について以下が成り立つこと：
->
-> $$\mu^*(B) = \mu^*{(B \cap A)} + \mu^*{(B \cap A^c)}$$
->
-> 可測集合を全て集めた集合をしばしば $\mathcal{M}$ と表記する。
->
-> 可測集合$A$に対して、$\mu(A) = \mu^*(A)$ とする。
+> $$
+> \mu^*(B) = \mu^*{(B \cap A)} + \mu^*{(B \cap A^c)}
+> $$
+> 可測集合を全て集めた集合をしばしば $\mathcal{M}$ と表記する。また、可測集合$A$に対して、$\mu(A) = \mu^*(A)$ とする。
 
 **備考**：数学科以外の人が見る集合はほぼ全て可測であると言って良い。例えば $\{48, 1, 7\}, \{0.1\}, \{\pi\}, [1, 100), \mathbb{Q}$ が挙げられる。
 
@@ -54,12 +57,14 @@ title: ルベーグ積分論
 
 > [!theorem] 有限加法性
 > 互いに素な $ A_1, A_2, ... A_n \in \mathcal{M} $ について、以下が成り立つ。
->
-> $$\mu^*\left(B \cap \bigcup\limits_{k=1}^{n} A_k\right) = \sum\limits_{k=1}^{n}{ \mu^*(B \cap A_k) }$$
+> $$
+> \mu^*\left(B \cap \bigcup\limits_{k=1}^{n} A_k\right) = \sum\limits_{k=1}^{n}{ \mu^*(B \cap A_k) }
+> $$
 >
 > 特に $B = \mathbb{R} $ のとき
->
-> $$\mu^*\left(\bigcup\limits_{k=1}^{n} A_k\right) = \sum\limits_{k=1}^{n}{ \mu^*(A_k) }$$
+> $$
+> \mu^*\left(\bigcup\limits_{k=1}^{n} A_k\right) = \sum\limits_{k=1}^{n}{ \mu^*(A_k) }
+> $$
 
 > [!theorem] 加算無限和と加算共通部分
 > 無限個の可測な集合の和と積も可測
@@ -85,13 +90,25 @@ $\leq$については加算劣加法性より常に成り立つため、$A$が�
 否定をとってドモルガンの法則を使えば、無限積についても可測であることが示される。
 
 > [!theorem] 加算加法性
-> $$\mu^*\left(\bigcup\limits_{k=1}^{\infty} A_k\right) = \sum\limits_{k=1}^{\infty}{ \mu^*(A_k) }$$
+> 互いに素な可測集合 $A_1, A_2...$ について、次が成り立つ。
+> $$
+> \mu^*\left(\bigcup\limits_{k=1}^{\infty} A_k\right) = \sum\limits_{k=1}^{\infty}{ \mu^*(A_k) }
+> $$
 
 $n$が有限の場合は先ほど証明したが、無限でも成り立つ。
 
 $$\mu^*(A) \geq \mu^*(\bigcup\limits_{k=1}^{n} A_k) = \sum\limits_{k=1}^{n}\mu^*(A_k) $$
 
 とすれば、$\leq$については自動的に成り立つので、$n$を無限に飛ばして挟むことで証明完了
+
+> [!theorem] 測度の連続性
+> 可測集合からなる $A_1,A_2...$ に対して、次が成り立つ。
+>
+> $$
+> A_{n} \subset A_{n+1} \implies \mu^*(\bigcup\limits_{n=1}^{\infty} A_n) = \lim_{n \to \infty} \mu^*(A_n) \\
+>
+> A_{n+1} \subset A_{n} \land \mu^*(A_n) < \infty \implies \mu^*(\bigcap\limits_{n=1}^{\infty} A_n) = \lim_{n \to \infty} \mu^*(A_n)
+> $$
 
 ### テクニック
 
@@ -112,3 +129,5 @@ $$\mu^*(A) \geq \mu^*(\bigcup\limits_{k=1}^{n} A_k) = \sum\limits_{k=1}^{n}\mu^*
 扱う対象が、既存の知っているルールで分析できるものであることを保証するためのもの。という風に解釈した。
 特に、「∞」が含まれていても、既存の代数のルールが適用が変わらず適用できることを保証できることが嬉しい。
 のだと思う。
+
+## 可測関数
