@@ -1,32 +1,12 @@
 ---
-title: 線形代数
+title: 行列式
 ---
 
-**線形代数をマスターしたら、大学数学をマスターしたといっても過言ではないだろう**😎
+## 前提知識
 
-## 目次
+- [[notes/LinearAlgebra/Basics|基本]]
 
-線形代数の難しさは、解析学と違って愚直に積み上がるものではなく、
-線形代数内のあらゆる理論が互いに、柔軟に結びつくことにある。(と思っている)
-なので、体系的にまとめるのは少し難しい。
-
-そのため、一回で完璧に理解するのではなく、何周もして少しずつ脳内のネットワークを緻密に
-していくような勉強法が好ましいと思う。
-
----
-
-## 基本変形
-
-> [!definition] 行基本変形、列基本変形
-> 1. 行(列)の入れ替え
-> 2. 行(列)を定数倍
-> 3. 行(列)に他の行(列)の定数倍を足す
->  
-> という操作からなる。これらの各操作は、ある行列の積という形で考えられる。  
-> 特に、左側からかける場合行基本変形、右からかける場合列基本変形となる。
-
-
-## 行列式
+## 概要
 
 応用的な観点で、行列式についてまとめる。
 行列式とは、正方行列について定義される値で、線形変換に伴う単位面積・体積あたりの拡大率と考えたりすることが出来る。
@@ -189,69 +169,3 @@ $
 ### 余因子行列
 
 ### クラメルの公式
-
-## 実ベクトル空間、部分空間
-
-> [!definition] 実ベクトル空間
-> ある集合に足し算とスカラー倍が定義されていて、その演算の結果も元の集合に属して次の公理を満たす、
-> そのような集合を**実ベクトル空間**と呼ぶ。
->
->  $\mathbf{x, y, z , 0}$ が実ベクトル空間 $\mathbf{V}$ に属して、$1,a,b \in \mathbb{R}$のとき、
-> $$
-> \begin{align*}
-> &(V_1) \quad (\mathbf{x + y}) + \mathbf{z} = \mathbf{x} + (\mathbf{y + z})\\
-> &(V_2) \quad \mathbf{x + 0} = \mathbf{x}\\
-> &(V_3) \quad \mathbf{x + y} = \mathbf{y + x}\\
-> &(V_4) \quad \mathbf{x + (-x)} = \mathbf{0}\\
-> &(V_5) \quad a(b\mathbf{x}) = (ab)\mathbf{x}\\
-> &(V_6) \quad 1\mathbf{x} = \mathbf{x}\\
-> &(V_7) \quad a\mathbf{(x + y)} = a\mathbf{x} + a\mathbf{y}\\
-> &(V_8) \quad (a+b)\mathbf{x} = a\mathbf{x} + b\mathbf{x}
-> \end{align*}
-> $$
-> これが成り立つ。
-
-要するに、世界には色々な集合があって、その中でも足し算や掛け算が定義されている集合の中で、
-加法やスカラー積について良い感じの性質が成り立っている扱いやすい集合だけを考えましょうね。ということである。
-
-> [!definition] 部分空間
-> 実ベクトル空間$\mathbf{V}$の**空でない**部分集合も実ベクトル空間である時、その集合を**部分空間**と呼ぶ。
-> そのことを示す際に、実ベクトル空間の公理全てを示す必要はなく、具体的に次の条件を調べられたら良い。
-> 
-> $$
-> \begin{align*}
-> &(1) \quad \mathbf{0 \in W}\\
-> &(2) \quad \mathbf{x, y \in W} \implies \mathbf{x+y \in W} \\
-> &(3) \quad \mathbf{x \in W}, c \in \mathbb{R} \implies c\mathbf{x} \in \mathbf{W}
-> \end{align*}
-> $$
-
-つまり、実ベクトル空間と部分空間は本質的に一緒ではある。
-
----
-
-## 線形写像の像, 核
-
-> [!definition] 線形写像の像, 核
-> $\operatorname{Im} f = f(\mathbf{V}) = \{f(\mathbf{x}) \mid \mathbf{x} \in V \}$  
-> $\operatorname{ker} f = \{\mathbf{x} \mid \mathbf{x} \in V, f(\mathbf{x}) = \mathbf{0}\}$
-
-どちらもあるベクトル空間$\mathbf{V}$上において、
-
-$\operatorname{Im} f$ とは**像**のことで、線形写像$f$によって写し出される他のベクトル空間$\mathbf{W}$の部分集合を指す。これは$\mathbf{W}$の部分空間となる。
-
-一方で、$\operatorname{ker} f$とは、線形写像$f$によって写し出されず$ \mathbf{0} $に圧縮されてしまう$\mathbf{V}$上の集合のことを指す。これは\mathbf{V}の部分空間となる。
-
-### 性質
-
-> [!theorem] 次元定理
-> $$
-> \operatorname{dim} V = \operatorname{dim} (\operatorname{Im} f) + \operatorname{dim} (\operatorname{ker} f)
-> $$
-
-$\operatorname{dim} (\operatorname{Im} f)$ は外部($\mathbf{W}$)に伝わる情報量、$\operatorname{dim} (\operatorname{ker} f)$ は内部で消失する情報量を表す。
-
-つまりは、どれだけの情報量が線形写像$f$によって保たれるのか、犠牲になるのか、という関係を表した数式である。
-
-## 二次形式
-
