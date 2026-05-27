@@ -177,3 +177,323 @@ $$ \quad F(\beta, V, N) = -\frac{1}{\beta} \log{Z_{V,N}(\beta)} $$
 > $$
 
 **ゆらぎ散逸定理**に繋がる。
+
+## 古典近似
+
+> [!definition] 古典近似における分配関数
+> $$
+> Z(\beta) = \frac{1}{N!} \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{3}{2}N} \int d^3\bm{r}_1 \cdots d^3\bm{r}_N \, e^{-\beta V(\bm{r}_1, \dots, \bm{r}_N)}
+> $$
+
+「互いに区別出来ないN個の系が、ある位置である運動量になる確率をエネルギーの重みに応じて全空間で足し合わせたもの」
+
+分配関数とは、先ほど見たように離散的な値を取るものであった。
+これはすなわち、系のとるエネルギー準位が離散的であったからだが、量子効果を無視できるほど温度が高かったり密度が低いマクロな視点において、その値は連続的とみなすことが出来るようになる。
+
+よって、系のエネルギーの古典的な表示を用いて、分配関数を再び導出したものが、上記の式である。この表式によって、様々な物理現象が後で見るように簡潔に記述出来るようになる。
+
+**導出**
+
+1. 系のエネルギーを古典的な方法で記述する.
+2. 確率密度を考えて、分配関数に相当する関数を見つける.
+3. 分配関数に相当する関数の物理次元を調整する
+4. 運動量部分の積分については分離できて、系の状態に依らずいつでも特定の値になることを示す
+
+まず、系のエネルギーを古典的な方法で記述すると以下のようになる。
+
+$$
+V(\bm{r}_1, \dots, \bm{r}_N) = \sum_{\substack{i,j=1 \\ (i<j)}}^{N} V_{\mathrm{int}}(|\bm{r}_i - \bm{r}_j|) + \sum_{i=1}^{N} V_{\mathrm{ext}}(\bm{r}_i) \\
+
+H(\bm{r}_1, \dots, \bm{r}_N, \bm{p}_1, \dots, \bm{p}_N) = \sum_{i=1}^{N} \frac{|\bm{p}_i|^2}{2m} + V(\bm{r}_1, \dots, \bm{r}_N)
+$$
+
+中々ゴツい見た目だが、運動エネルギーと位置エネルギーに分けて、更に位置エネルギーは相互作用によるエネルギーとそうでないエネルギーで分けているだけである。
+
+すると、確率密度が次のように表せる。
+
+$$
+p^{(\mathrm{can}, \beta)} := \frac{e^{-\beta H}}{\int d^3\bm{r}_1 \cdots d^3\bm{r}_N \, d^3\bm{p}_1 \cdots d^3\bm{p}_N \, e^{-\beta H}}
+$$
+
+「位置と運動量を全部指定する」 $\\$
+$\rightarrow$ 「エネルギー $H$ が一意に決まる」 $\\$
+$\rightarrow$ 「その状態が出現する確率密度がボルツマン因子（$e^{-\beta H}$）の比で決まる」
+
+ということである。
+
+この確率密度の分母を眺めると、分配関数に相当するものではないかと考えることが出来る。
+
+$$
+Z(\beta)? = \int d^3\bm{r}_1 \cdots d^3\bm{r}_N \, d^3\bm{p}_1 \cdots d^3\bm{p}_N \, e^{-\beta H}
+$$
+
+しかし、分配関数とは本来無次元である。そこで、プランク定数$h$で次元を調整することを試みる。
+分配関数の中身の値は変わってしまうが、実は分配関数の値に関して定数倍する分には、実は問題無いのだ。
+また、それぞれの系は区別しないので$N!$で割ることを考えて、分配関数の古典近似における表式を得ることとなる。
+
+$$
+Z(\beta) = \frac{1}{N!h^{3N}} \int d^3\bm{r}_1 \cdots d^3\bm{r}_N \, d^3\bm{p}_1 \cdots d^3\bm{p}_N \, e^{-\beta H}
+$$
+
+ところで、$H = \sum_{i=1}^{N} \frac{|\bm{p}_i|^2}{2m} + V(\bm{r}_1, \dots, \bm{r}_N)$ は$e$の肩に乗っているから、$Z(\beta)=$ ($p$に関する項)$\times$(rに関する項)といった風に綺麗に分離することが出来る。
+
+さらに、($p$に関する項)について、これは系に依らず毎回一定の値を取る。
+
+$|p_i|^2 = p_x^2 + p_y^2 + p_z^2$であることと、ガウス積分を用いる。
+
+$$
+\int d^3\bm{p}_i \, e^{-\beta |\bm{p}_i|^2 / 2m} = \left( \int_{-\infty}^{\infty} dp \, e^{-\frac{\beta p^2}{2m}} \right)^3 = \left( \sqrt{\frac{2m\pi}{\beta}} \right)^3
+$$
+
+よって、これを元の分配関数の表式に代入することで、また$h=2\pi \hbar$であることを用いて、最初に述べた古典近似における分配関数の簡潔な表式を得ることが出来る。
+
+### 具体例1: 調和振動子とエネルギー等分配則
+
+上記の結論を、調和振動子に適用してみる。
+
+まず、調和振動子1つからなる系について考える。ポテンシャルエネルギーは$V(x)=\frac{m\omega^2}{2}x^2$なので、分配関数はガウス積分を用いて次のように計算できる。
+
+$$
+\begin{align*}
+Z(\beta) &= \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{1}{2}} \int_{-\infty}^{\infty} dx \exp\left( -\beta \frac{m \omega^2}{2} x^2 \right) \\
+
+&= \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{1}{2}} \left( \frac{2\pi}{\beta m \omega^2} \right)^{\frac{1}{2}} \\
+
+&= \frac{1}{\hbar \omega \beta}
+\end{align*}
+$$
+
+次に、互いに独立した$n$つの粒子と、そのうちの$m$つが調和振動子である系を考える。
+ハミルトニアンは次の通りであるから
+
+$$
+H = \sum_{i=1}^{N} \frac{p_i^2}{2m_i} + \sum_{i=1}^{M} \frac{m_i \omega_i^2 }{2}x_i^2
+$$
+
+分配関数を求める。直前の調和振動子一つだけの系の計算結果を用いることと、その後に残る項を次のように置き換えることに注意する。$\nu_{N-M} = \int dx_{M+1}dx_{M+2}\cdots dx_N$
+
+$$
+\begin{align*}
+Z(\beta) &= \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{3N}{2}} \int_{-\infty}^{\infty} dx_1 dx_2 \dots dx_N \exp\left( -\beta \frac{m_i \omega_i^2 x_i^2}{2} \right)\\
+&=
+\beta^{-\frac{M+N}{2}} \times \mathcal{V}_{N-M} \prod_{i=1}^{N} \left( \frac{m_i}{2\pi \hbar} \right)^{\frac{1}{2}} \prod_{i=1}^{M} \left( \frac{2\pi}{m_i \omega_i^2} \right)^{\frac{1}{2}}
+\end{align*}
+$$
+
+エネルギーの期待値を考えるにあたって$\beta$に依存しない係数に興味はない。
+分配関数が明らかになったので、エネルギー期待値は一瞬で求められる。
+
+$$
+\log Z(\beta) = -\frac{M+N}{2} \log \beta + \log ( \, \sim \, ) \\
+
+\therefore
+-\frac{d}{d\beta} \log Z(\beta) = \frac{M+N}{2} \cdot \frac{1}{\beta}
+= (M+N)\frac{k_B T}{2}
+$$
+
+この驚くほど単純な計算結果に着目する。
+実は、**ハミルトニアンが位置座標の二乗と運動量の二乗の和で記述できる系**において、項の数だけエネルギー$\frac{kT}{2}$が配分されていると考えると、複雑な積分計算をしなくともエネルギー期待値の値を出すことが出来るのだ。この事実を**エネルギー等分配則**と呼ぶ。
+
+### 具体例2: 一様重力中における理想気体
+
+$N$個の粒子が$L \times L \times H$の空間を飛び回る系を考える。
+ハミルトニアンは次の通り
+
+$$
+H = \sum_{i=1}^{N} \frac{\boldsymbol{p}_i^2}{2m} + \sum_{i=1}^{N} mgz_i
+$$
+
+まず、$N=1$における分配関数を計算する。
+
+$$
+\begin{align*}
+
+\int d^3\boldsymbol{r} \, e^{-\beta m g z} &= \int_{0}^{L} dx \int_{0}^{L} dy \int_{0}^{H} e^{-\beta m g z} dz\\
+
+&= L^2 \int_{0}^{H} e^{-\beta m g z} dz \\
+
+&= \frac{L^2}{\beta m g} \left( 1 - e^{-\beta m g H} \right)
+\end{align*}
+$$
+
+これを元に、一般のときの分配関数を計算すると次の通り。
+
+$$
+\begin{align*}
+Z(\beta) &= \frac{1}{N!} \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{3N}{2}} \int d^3\boldsymbol{r}_1 \dots d^3\boldsymbol{r}_n \, e^{-\beta \sum_{i} m g z_i} \\
+
+&= \frac{1}{N!} \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{3N}{2}} \left( \frac{L^2}{\beta m g} \right)^N \left( 1 - e^{-\beta m g H} \right)^N \\
+
+&= \left( \frac{1 - e^{-\beta m g H}}{\beta^{\frac{5}{2}}} \right)^N \cdot (\sim)
+\end{align*}
+$$
+
+$\beta$に着目してエネルギー期待値を計算すると
+
+$$
+\langle \hat{H} \rangle_\beta^{can} = \frac{5}{2} N k_B T - \frac{N m g H}{e^{\beta m g H} - 1}
+$$
+
+この計算結果について考える。
+
+$(\text{i})~$高温つまり $\beta mgH \ll 1 ~ \therefore mgH \ll k_B T$ において $\\$
+$~$ $e^{\beta m g H} \simeq 1+\beta mgH$と近似できるので $\\$
+$$
+\langle \hat{H} \rangle_\beta^{can} \rightarrow \frac{3}{2} N k_B T
+$$
+
+高校物理の気体分子運動論で導いた単原子理想気体のモル比熱と結果が一致する。また、自由度は$3$なのでエネルギー等分配則が成り立っている。
+
+$(\text{ii})~$低温つまり $\beta mgH \gg 1 ~ \therefore mgH \gg k_B T$ において
+$$
+\langle \hat{H} \rangle_\beta^{can} \rightarrow \frac{5}{2} N k_B T
+$$
+
+重力が強く、低い位置に粒子が溜まっていると考えられる。そのためモル比熱が大きくなるのは、温度を上げる際に粒子を持ち上げるためのエネルギーも必要と解釈することが出来る。
+
+---
+
+## 結晶の性質
+
+これまでの成果──特に、調和振動子の結果を応用して、結晶の物的性質について調べる。田崎晴明「統計力学 I」の第六章に沿って、以下の順番で話を進める。
+
+1. 歴史的経緯の説明
+2. 格子振動の力学(1次元)
+3. 格子振動の力学(3次元)
+4. 三次元の結晶の低温での振る舞い
+
+### 歴史的経緯
+
+結晶中の粒子が、お互いに干渉せず各々の位置で振動していると考える最も単純なモデルを考えると、調和振動子のエネルギーの期待値の結果より、結晶全体のエネルギー期待値とモル比熱は
+
+$$
+\langle \hat{H} \rangle_\beta^{can} = 3NkT = 3nRT \\
+\therefore ~c(T) \coloneqq \frac{d}{dT}(\frac{\langle \hat{H} \rangle_\beta^{can}}{n}) = 3R
+$$
+
+となる。
+実際に、デュロンとプティによって1819年、多くの固体のモル比熱が$3R \simeq 24.9 ~ \text{J{(mol K)}}^{-1} $ に近い値を取ることが観測された。(これだけ単純なモデルでも、統計力学の成果が出ているのはすごい！)
+
+ところが、このモデルでは低温でモル比熱が$3R$より小さくなったり、物質ごとに異なる理由が説明できなかった。
+
+その後アインシュタインの提唱したモデルによって、低温部分の理論的説明について前進はしたものの、また新たな問題点が生じていくこととなる。その問題点を今から見る統計力学(というか量子力学？)の成果によって解決していくこととなる。
+
+### 格子振動の力学(1次元)
+
+設定は次の通りである。
+
+$N$個の粒子が、横一列に間隔$a$を保って並んでいるとする。つまり$x \in \chi \coloneqq \{a,2a,\cdots ,Na \}$とする。隣り合う粒子は、自然長$a$バネ定数$\kappa$のバネで結ばれているとする。
+
+特に左から$k$番目の粒子は中心$ka$の何かしらの振動をすると予想されるが、座標$x$からの相対座標を$q_x$とする。$x$は、粒子そのものを指してると考えても良い。
+
+座標$x$に位置した粒子にのみ着目した運動方程式は次の通りである。
+
+$$
+\begin{align*}
+m \ddot{q}_x(t) &= -\kappa (q_x(t) - q_{x+a}(t)) -\kappa (q_x(t) - q_{x-a}(t)) \\
+&= -2\kappa q_x(t) + \kappa q_{x+a}(t) + \kappa q_{x-a}(t)
+\end{align*}
+$$
+
+この式が$N$本立つわけだが、煩わしいので以下に示す**実対称行列**$K$を導入することにする。
+
+$$
+K_{x,x'} =
+\begin{cases} 2\kappa & x = x' \\ -\kappa & |x - x'| = a \\ 0 & \text{otherwise}
+\end{cases}
+\\
+K = \begin{bmatrix} 2\kappa & -\kappa & 0 & 0 & \\ -\kappa & 2\kappa & -\kappa & 0 & \\ 0 & -\kappa & 2\kappa & -\kappa & \\ 0 & 0 & -\kappa & 2\kappa & \\ & & & & \ddots 
+\end{bmatrix}
+$$
+
+これによって、元の運動方程式は以下のように記述できるようになる。
+
+$$
+m \ddot{q}_x(t) = -\sum_{x' \in X} K_{x,x'} q_{x'}(t)
+$$
+更に、以下のように記述する。
+$$
+m
+\begin{pmatrix} 
+\ddot{q}_0(t) \\ \ddot{q}_1(t) \\ \vdots 
+\end{pmatrix} 
+= -K 
+\begin{pmatrix} 
+q_0(t) \\ q_1(t) \\ \vdots 
+\end{pmatrix}
+$$
+
+$$
+\Leftrightarrow m \ddot{\boldsymbol{q}}(t) = -K \boldsymbol{q}(t)
+$$
+
+ここまでで、行列を用いて$N$本の運動方程式を簡潔に記述できるようになった。
+これより線形代数の性質を用いて、この運動について調べていく。
+
+行列$K$は実対称行列なので、線形代数の成果によって
+$N$本の固有値とそれに対応する固有ベクトルが存在することが分かっている。更に、互いに異なる固有ベクトルは直交することが知られている。
+
+$\alpha^{(k)}$ : $k$番目の固有値$\\$
+$\boldsymbol{\xi}^{(k)}$ : $k$番目の固有ベクトル（規格化済み）$\\$
+
+$$
+K \boldsymbol{\xi}^{(k)} = \alpha^{(k)} \boldsymbol{\xi}^{(k)}
+
+\\
+
+\Leftrightarrow K 
+\begin{pmatrix} 
+\xi_0^{(k)} \\ \xi_a^{(k)} \\ \vdots 
+\end{pmatrix} = \alpha^{(k)} 
+\begin{pmatrix} 
+\xi_0^{(k)} \\ \xi_a^{(k)} \\ \vdots 
+\end{pmatrix}
+
+\\
+
+\therefore \sum_{x' \in X} K_{x,x'} \xi_{x'}^{(k)} = \alpha^{(k)} \xi_x^{(k)}
+$$
+
+運動方程式の特殊解について考える。
+運動が一つの固有振動で、次の通りに表されるとする： $q_x(t) = \varphi(t) \xi_x^{(k)}$
+
+これによって、行列$K$の計算を固有ベクトルを用いて単純化することによって、解析解が求められるようになる。
+
+$$
+\begin{cases} 
+q_x(t) = \varphi(t) \xi_x^{(k)} \\ m \ddot{q}_x(t) = -\sum_{x' \in X} K_{x,x'} q_{x'}(t) 
+\end{cases}
+\\
+\begin{align*}
+\Rightarrow m \ddot{\varphi}(t) \xi_x^{(k)} 
+&= -\varphi(t) \sum_{x' \in X} K_{x,x'} \xi_{x'}^{(k)}\\
+&= -\varphi(t) \alpha^{(k)} \xi_x^{(k)} \\
+\iff \ddot{\varphi}(t) &= -\alpha^{(k)} \varphi(t)
+\end{align*}
+$$
+
+$\varphi_0$,$\theta_0$は初期条件の定数として、解析解は次の通りである。
+$$
+\therefore q_x(t) = \varphi_0 \cos\left( \sqrt{\frac{\alpha^{(k)}}{m}} t + \theta_0 \right) \xi_x^{(k)}
+$$
+
+ところでだが、元々の運動方程式は線形微分方程式であるから、今求めた解を異なる$k$について足し合わせて、最終的に一般解を以下のように表すことが出来る。
+
+$$
+q_x(t) = \sum_{k \in \mathcal{K}} \varphi_k(t) \xi_x^{(k)}
+$$
+
+また、固有ベクトルと固有値の具体的な値は次の通りである。
+
+$$
+\begin{cases}
+\xi_x^{(k)} = \sqrt{\frac{2}{N+1}} \sin(kx) \\ 
+\alpha^{(k)} = 4K \left( \sin \frac{ak}{2} \right)^2 
+\end{cases}
+$$
+
+最終的なハミルトニアンはこうなる。
+
+$$
+H(Q, P) = \sum_{k \in \mathcal{K}} \left( \frac{P_k^2}{2m} + \frac{1}{2} m \omega_k^2 Q_k^2 \right)
+$$
