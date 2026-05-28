@@ -161,7 +161,7 @@ $$ \quad F(\beta, V, N) = -\frac{1}{\beta} \log{Z_{V,N}(\beta)} $$
 
 実質的に、分配関数の対数を取るだけでヘルムホルツエネルギーが得られるということになる。
 
-## 性質
+### 性質
 
 > [!theorem] 複数の系の分配関数
 > 注目している量子系が、互いに独立しているN個の部分系からできてるとき、全系の分配関数は
@@ -177,6 +177,181 @@ $$ \quad F(\beta, V, N) = -\frac{1}{\beta} \log{Z_{V,N}(\beta)} $$
 > $$
 
 **ゆらぎ散逸定理**に繋がる。
+
+### 具体例1：理想気体
+
+$L^3$の空間に閉じ込められた互いに独立した$N$個の粒子からなる系、つまり理想気体を量子系で考える。
+量子系において、粒子一つのエネルギーは3つの整数を用いて状態エネルギーを指定される。
+
+$$
+E = E_0 \times (n_x^2+n_y^2+n_z^2)
+$$
+
+このような粒子が$n$つ存在する。よって、分配関数は次の通り。
+
+$$
+\begin{align*}
+Z_{V,N}(\beta) &= \frac{1}{N!} \sum \exp\left[ -\beta E_0 \sum_{a=x,y,z} \sum_{i=1}^{N} (n_a^{(i)})^2 \right] \\
+
+&= \frac{1}{N!} \sum \exp\left[ -\beta E_0 \left( \{n_x^{(1)}\}^2 + \{n_x^{(2)}\}^2 + \dots + \{n_y^{(1)}\}^2 + \dots + \{n_z^{(1)}\}^2 + \dots \right) \right] \\
+
+&= \frac{1}{N!} \left( \sum_{n=1}^{\infty} \exp\left[ -\beta E_0 n^2 \right] \right)^{3N} \\
+\end{align*}
+$$
+
+最後の式変形は少し跳躍しているが、意味を考えれば当たり前でもある。
+
+例えば$n_x^{(1)}$でも$n_y^{(100)}$でもなんでも、1つの変数について考えると、これらの変数は$1$以上整数であればどんな値でも取りうる(とはいえ、数字が大きくなればなるほどその確率は指数的に減っていく)$\\$
+よって、取りうるエネルギー状態を全て足し合わせると$\sum_{n=1}^{\infty} \exp\left[ -\beta E_0 n^2 \right]$となり、
+このような変数が$3$(次元)$\times N$個存在する。これらは完全に互いに独立しているので、$3N$乗すればよろしい。
+
+このままの形では扱いにくいので、積分計算出来るように近似する。
+
+$$
+x = \sqrt{\beta E_0} \, n \quad \left( dx = \sqrt{\beta E_0} \right) \\
+$$
+
+$$
+\begin{aligned}
+\sum_{n=1}^{\infty} \exp(-x^2)
+&= \frac{1}{\sqrt{\beta E_0}} \sum_{n=1}^{\infty} \sqrt{\beta E_0} \exp(-x^2) \\
+&\simeq \frac{1}{\sqrt{\beta E_0}} \int_{0}^{\infty} dx \, \exp(-x^2) \\
+
+&= \frac{\sqrt{\pi}}{2\sqrt{\beta E_0}} \qquad \left( E_0 \coloneqq \frac{\pi^2 \hbar^2}{2mL^2} \right) \\
+
+&= \sqrt{\frac{m}{2\pi \hbar^2 \beta}} \, L \\
+
+\therefore \quad Z_{V,N}(\beta) &\simeq \frac{V^N}{N!} \left( \frac{m}{2\pi \hbar^2 \beta} \right)^{\frac{3N}{2}}
+\end{aligned}
+$$
+
+$V=L^3$とする。このように分配関数が扱いやすい形になったので、エネルギー期待値を計算する。
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{can} 
+&= -\frac{\partial}{\partial \beta} \left[ -\frac{3N}{2} \log \beta + \dots \right] \\
+&= \frac{3}{2} \cdot \frac{N}{\beta} \\
+&= \frac{3}{2} N k_B T
+\end{aligned}
+$$
+
+こうして、高校物理でも扱った理想気体の熱容量の同じ結論が得られたが、そもそも理想気体を用いて絶対温度$T$を定義しているので、これは統計力学の成果ではなく、整合性を確認しただけに過ぎない。
+
+次にヘルムホルツエネルギーから、圧力$P$を求める。
+
+$$
+F(\beta; V, N) = -\frac{1}{\beta} \log Z_V(\beta)
+= -\frac{1}{\beta} \{ N \log V + \dots \}
+$$
+$$
+\begin{aligned}
+P(\beta; V, N) &= -\frac{\partial}{\partial V} F(\beta; V, N) \\
+
+&= \frac{N}{\beta} \cdot \frac{1}{V} \\
+
+&= \frac{N}{V} k_B T \\
+
+\therefore PV &= N k_B T \quad ( = nRT )
+\end{aligned}
+$$
+
+このようにして、理想気体の状態方程式が求められた。
+
+### 具体例2: 常磁性体
+
+絶縁体の結晶が存在し、各々の原子が不対電子を一つずつ持ってるとする。スピン同士は本来相互作用を及ぼすが、一旦独立してると考えて話を進める。
+この物体が一様磁場$(0,0,H)$に置かれてると考えて、この系の性質を調べる。
+
+いつも通り、まずはスピン一つからなる系から考える。
+
+$$
+E_\sigma = -\mu_0 H \sigma
+= \begin{cases} -\mu_0 H & (\text{磁場と同じ向き}) \\ +\mu_0 H & (\text{磁場と違う向き}) \end{cases}
+$$
+
+$$
+Z_1(\beta, H) = e^{\beta \mu_0 H} + e^{-\beta \mu_0 H}= 2 \cosh(\beta \mu_0 H)
+$$
+
+$$
+\langle \hat{\sigma} \rangle_{\beta,H}^{\text{can}} = \frac{e^{\beta \mu_0 H} + (-1) e^{-\beta \mu_0 H}}{Z_1(\beta, H)} = \tanh(\beta \mu_0 H)
+$$
+
+以上のように、後々の計算が楽になるようにスピン$\sigma$の期待値まで求めた。
+
+次に、以下のように磁化と呼ばれる物理量を定義する。これは、統計力学関係なくよく用いられている物理量であり、「系がどのぐらい磁石となっているか」の目安となる。また、マクロに精密な測定が可能である。
+
+$$
+\text{磁化} : \hat{m} \coloneqq \frac{1}{N} \sum_{i=1}^{N} \mu_0 \hat{\sigma}_i
+$$
+
+$$
+\langle \hat{m} \rangle_{\beta,H}^{\text{can}} = \frac{1}{N} \sum_{i=1}^{N} \mu_0 \langle \hat{\sigma}_i \rangle_{\beta,H}^{\text{can}}
+= \mu_0 \tanh(\beta \mu_0 H)
+$$
+
+事前に計算を済ませたおかげで、簡潔に計算が進められる。
+$N$が十分大きい時、この磁化の値が確定的になることを標準偏差を計算することによって求める。
+
+$$
+\begin{aligned}
+\langle \hat{m}^2 \rangle_{\beta,H}^{\text{can}}
+&= \frac{\mu_0^2}{N^2} \left\langle \left( \sum_{i=1}^{N} \hat{\sigma}_i \right)^2 \right\rangle \\
+&= \frac{\mu_0^2}{N^2} \left( \sum_{i=1}^{N} \langle \hat{\sigma}_i^2 \rangle + \sum_{i \neq j} \langle \hat{\sigma}_i \hat{\sigma}_j \rangle \right) \\
+&= \frac{\mu_0^2}{N^2} \left( N \cdot 1 + (N^2 - N) \{ \tanh(\beta \mu_0 H) \}^2 \right) \\
+&= \mu_0^2 \left( \frac{1}{N} + \left( 1 - \frac{1}{N} \right) \{ \tanh(\beta \mu_0 H) \}^2 \right) \\
+&= \mu_0^2 \left( \{ \tanh(\beta \mu_0 H) \}^2 + \frac{1 - \{ \tanh(\beta \mu_0 H) \}^2}{N} \right)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\therefore \sigma_{\beta,H}^{\text{can}}[\hat{m}] &= \sqrt{ \langle \hat{m}^2 \rangle_{\beta,H}^{\text{can}} - \left[ \langle \hat{m} \rangle_{\beta,H}^{\text{can}} \right]^2 } \\
+
+&= \mu_0 \cdot \frac{\sqrt{1 - \{ \tanh(\beta \mu_0 H) \}^2}}{\sqrt{N}} \\
+&\xrightarrow[N \to \infty]{} 0
+\end{aligned}
+$$
+
+磁化率とは、外部から磁場をかけた際に磁化がどれほど強くなるのかという指標になる物理量である。
+
+$$
+\begin{aligned}
+\chi(\beta) &\coloneqq \left. \frac{\partial}{\partial H} \langle \hat{m} \rangle_{\beta,H}^{\text{can}} \right|_{H=0} \\
+
+&= \mu_0^2 \beta \\
+
+&= \frac{\mu_0^2}{kT}
+
+\end{aligned}
+$$
+
+高温で磁化率が反比例するという振る舞いは実験的にも実際に確認されていて、**キュリーの法則**と呼ぶ。
+
+次に、熱力学的な量についても計算を行う。いつもの流れで分配関数、ヘルムホルツエネルギーを求めて、そこからエントロピーを計算する。
+
+$$
+Z_N(\beta, H) = \{ 2 \cosh(\beta \mu_0 H) \}^N
+$$
+
+$$
+F_N(\beta, H) = -\frac{N}{\beta} \log( 2 \cosh(\beta \mu_0 H) )
+
+= -N k_B T \log\left( 2 \cosh\left( \frac{\mu_0 H}{k_B T} \right) \right)
+$$
+
+$$
+\begin{aligned}
+S_N(\beta, H) &= -\frac{\partial}{\partial T} F_N(\beta, H) \\
+
+&= N k_B \log\left( 2 \cosh\left( \frac{\mu_0 H}{k_B T} \right) \right) - \frac{N \mu_0 H}{T} \tanh\left( \frac{\mu_0 H}{k_B T} \right) \\
+
+&= f\left( \frac{H}{T} \right)
+\end{aligned}
+$$
+
+最後の結果を見てほしい。エントロピー$S$は$\frac{H}{T}$の関数なので、$S$一定つまり断熱状態で$H$を小さくすると、$T$も小さくなるのだ。この手法で物質の温度を実際に下げることが出来て**断熱消磁**と呼ばれている。なんと、この方法によって$10^{-3}\text{K}$もの温度を実現出来るらしい。
 
 ## 古典近似
 
