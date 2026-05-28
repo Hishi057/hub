@@ -336,3 +336,193 @@ $$
 
 ### 具体例3: 二準位系と比熱
 
+エネルギー準位を$E_1$あるいは$E_2$しか取らない系について考える。
+
+$$
+Z_1(\beta) = e^{-\beta E_1} + e^{-\beta E_2}
+$$
+
+$$
+\begin{aligned}
+\frac{\langle \hat{H} \rangle_\beta^{\text{can}}}{N} &= \frac{E_1 e^{-\beta E_1} + E_2 e^{-\beta E_2}}{e^{-\beta E_1} + e^{-\beta E_2}}
+\\
+&= \frac{E_1 + E_2 e^{-\beta \Delta E}}{1 + e^{-\beta \Delta E}} \qquad ( \Delta E \coloneqq E_2 - E_1 )
+\\
+&= E_1 + \frac{\Delta E}{e^{\beta \Delta E} + 1}
+\end{aligned}
+$$
+
+よって、比熱は以下のように計算できる。
+
+$$
+\begin{aligned}
+c(T) &= \frac{d}{dT} \left( \frac{\langle \hat{H} \rangle_\beta^{\text{can}}}{N} \right)
+\\
+&= -\frac{1}{k_B T^2} \cdot \frac{d}{d\beta} \left( E_1 + \frac{\Delta E}{e^{\beta \Delta E} + 1} \right)
+\\
+&= -\frac{1}{k_B T^2} \cdot \left( - \frac{(\Delta E)^2 e^{\beta \Delta E}}{(e^{\beta \Delta E} + 1)^2} \right)
+\\
+&= \frac{(\Delta E)^2}{k_B T^2} \cdot \frac{e^{\beta \Delta E}}{\left( e^{\frac{\beta \Delta E}{2}} \left( e^{\frac{\beta \Delta E}{2}} + e^{-\frac{\beta \Delta E}{2}} \right) \right)^2}
+\\
+&= \frac{(\Delta E)^2}{k_B T^2} \cdot \left\{ 2 \cosh\left( \frac{\Delta E}{2 k_B T} \right) \right\}^{-2}
+\end{aligned}
+$$
+
+この結果について考察する。
+
+$T \rightarrow \infty$ のとき、$\frac{(\Delta E)^2}{k_B T^2} \rightarrow 0$で$\cosh$の項は$1$に近づくので、比熱は$0$となる。$\\$
+$T \rightarrow 0$ のとき、$\frac{(\Delta E)^2}{k_B T^2} \rightarrow \infty$だが$\cosh$は指数的に$0$に近づくので、これも比熱は0となる。$\\$
+以上から、途中の温度で比熱がピークとなるのではないか？と予測されるが、この予測は実際に正しく、**ショットキー型の比熱**と呼ばれている。
+
+これが、二準位以外の系でも、この傾向が一般に見られそうなことを理論的に示していく。
+
+#### より一般の系における低温における比熱
+
+ある系が取りうるエネルギーの中で最も低いものを$E_GS$とする。そこから、低温状態なので数少ない$n$個の粒子が局所的に励起状態になって、系のエネルギーが$n \Delta E$となる状況を考える。
+
+励起状態は、ある程度互いに離れたところで起きると考えて、そうすると体積に比例してその励起状態の個数が増えるだろう。だから、体積$V$と単位体積$b$を考えて、基底状態に1つ局所的な励起を起こす方法は$\frac{V}{v}$通りあると考えられる。$n$個あると考えれば組み合わせの公式を使って表現すればよく、そのような仮定のもと分配関数を導出していく。
+
+$$
+\begin{aligned}
+Z_V(\beta) &= e^{-\beta E_{\text{GS}}} + \sum_{n=1}^{\infty} \binom{V/v}{n} e^{-\beta (E_{\text{GS}} + n\Delta E)}
+\\
+&\simeq e^{-\beta E_{\text{GS}}} \sum_{n=0}^{\infty} \frac{1}{n!} \left( \frac{V}{v} \right)^n e^{-\beta n \Delta E}
+\\
+&\simeq \exp\left[ -\beta E_{\text{GS}} + \frac{V}{v} e^{-\beta \Delta E} \right]
+\end{aligned}
+$$
+
+最後は、$e^x$のマクローリン展開(の逆)を用いた。分配関数が求まったので、比熱まで簡単に計算することができる。
+
+$$
+\langle \hat{H} \rangle_{\beta,V}^{\text{can}} 
+= -\frac{d}{d\beta} \log Z_V(\beta)
+= E_{\text{GS}} + \frac{V \Delta E}{v} e^{-\beta \Delta E}
+$$
+
+$$
+\begin{aligned}
+c(T) &= \frac{d}{dT} \left( \frac{\langle \hat{H} \rangle_\beta^{\text{can}}}{V} \right)
+\\
+&= -\frac{1}{k_B T^2} \cdot \frac{d}{d\beta} \left( \frac{\Delta E}{v} e^{-\beta \Delta E} \right)
+\\
+&= \frac{\Delta E^2}{v k_B T^2} e^{-\frac{\Delta E}{k_B T}}
+\end{aligned}
+$$
+
+$T \rightarrow 0$において、たしかに比熱が$0$に近づくことが分かる。
+
+#### より一般の系における高温における比熱
+
+ある系の部分的な系を考える。そのようにして比熱を求めれば、結局は元の系で比熱を求めるのと同じこととなる。
+
+部分系のエネルギー固有状態を、$E_1,E_2\cdots$として、$E_1$が最も低いエネルギー状態とする。また、高温なので$\beta (E_i-E_1) \ll 1$として良い。
+
+$$
+\begin{aligned}
+Z(\beta) &= e^{-\beta E_1} + e^{-\beta E_2} + \dots + e^{-\beta E_n}
+\\
+&= e^{-\beta E_1} \sum_{i=1}^{n} e^{-\beta (E_i - E_1)}
+\\
+&\simeq e^{-\beta E_1} \sum_{i=1}^{n} \left\{ 1 - \beta(E_i - E_1) + \frac{1}{2}\beta^2(E_i - E_1)^2 \right\}
+\\
+&= n e^{-\beta E_1} \left\{ 1 - \beta \overline{\Delta E} + \frac{1}{2}\beta^2 \overline{(\Delta E)^2} \right\}
+\end{aligned}
+$$
+
+ただし
+
+$$
+\overline{\Delta E} \coloneqq 
+\frac{1}{n} \sum_{i=1}^{n} (E_i - E_1)
+\qquad
+\overline{(\Delta E)^2} \coloneqq 
+\frac{1}{n} \sum_{i=1}^{n} (E_i - E_1)^2
+$$
+
+以下、$\beta \ll 1$であることを忘れずにエネルギー期待値を計算する。
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{\text{can}} &= -\frac{\partial}{\partial \beta} \log Z(\beta)
+\\
+&= E_1 + \frac{\overline{\Delta E} - \beta \overline{(\Delta E)^2}}{1 - \beta \overline{\Delta E} + \frac{\beta^2}{2}\overline{(\Delta E)^2}}
+\\
+&\simeq E_1 + \left( \overline{\Delta E} - \beta \overline{(\Delta E)^2} \right) \left( 1 + \beta \overline{\Delta E} \right)
+\\
+&\simeq E_1 + \overline{\Delta E} - \beta \left\{ \overline{(\Delta E)^2} - (\overline{\Delta E})^2 \right\}
+\end{aligned}
+$$
+
+従って、比熱は簡単に以下のように求められる。
+
+$$
+c(T) = \frac{\overline{(\Delta E)^2} - (\overline{\Delta E})^2}{k_B T^2}
+$$
+
+結果に着目すると、$T^2$のオーダーで$0$に収束していくことがわかる。
+
+#### 具体例4: 調和振動子
+
+古典系において最も基本的な単振動をする系に対応する量子系である調和振動子は、以下のようなエネルギー準位を持つ。
+
+$$
+E_n = \left( n + \frac{1}{2} \right) \hbar\omega \qquad (n = 0, 1, 2, \dots)
+$$
+
+これを用いて、分配関数とエネルギーの期待値を求める。
+
+$$
+Z(\beta) = \sum_{n=0}^{\infty} e^{-\beta E_n}
+= e^{-\frac{\beta \hbar\omega}{2}} \sum_{n=0}^{\infty} \{ e^{-\beta \hbar\omega} \}^n
+= e^{-\frac{\beta \hbar\omega}{2}} \cdot \frac{1}{1 - e^{-\beta \hbar\omega}}
+$$
+
+途中で等比級数の和の公式を使った。
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{\text{can}} &= -\frac{d}{d\beta} \left\{ -\frac{\beta \hbar\omega}{2} + \log(1 - e^{-\beta \hbar\omega})^{-1} \right\}
+\\
+&= \frac{\hbar\omega}{2} + \frac{\hbar\omega e^{-\beta \hbar\omega}}{1 - e^{-\beta \hbar\omega}}
+\\
+&= \frac{\hbar\omega}{2} + \frac{\hbar\omega}{e^{\beta \hbar\omega} - 1}
+\end{aligned}
+$$
+
+この結果について考察する。
+
+$\beta \hbar\omega \gg 1 \iff \hbar\omega \gg k_B T$ において
+
+$$
+\langle \hat{H} \rangle_\beta^{\text{can}} \simeq \frac{\hbar\omega}{2}
+$$
+
+$\beta \hbar\omega \ll 1 \iff \hbar\omega \ll k_B T$ において
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{\text{can}} &\simeq \frac{\hbar\omega}{2} + \frac{\hbar\omega}{\left( 1 + \beta \hbar\omega + \frac{1}{2}(\beta \hbar\omega)^2 \right) - 1}
+\\
+&= \frac{\hbar\omega}{2} + \frac{1}{\beta} \cdot \frac{1}{1 + \frac{1}{2}\hbar\omega \beta}
+\\
+&\simeq \frac{\hbar\omega}{2} + \frac{1}{\beta} \left( 1 - \frac{\hbar\omega}{2} \beta \right)
+\\
+&= k_B T
+\end{aligned}
+$$
+
+比熱について計算する。
+
+$$
+\begin{aligned}
+c(T) &= -\frac{1}{k_B T^2} \cdot \frac{d}{d\beta} \langle \hat{H} \rangle_\beta^{\text{can}}
+\\
+&= \frac{(\hbar\omega)^2}{k_B T^2} \cdot \frac{e^{\beta \hbar\omega}}{(e^{\beta \hbar\omega} - 1)^2}
+\\
+&= \frac{(\hbar\omega)^2}{k_B T^2} \cdot \left\{ 2 \sinh\left( \frac{\hbar\omega}{2 k_B T} \right) \right\}^{-2}
+\end{aligned}
+$$
+
+計算すると、$kT \ll \hbar\omega$の低温において比熱が急激に$0$になるが、逆に高温の場合は一定値$c(T) \simeq k$を取ることが分かる。
+ショットキー型の比熱とならないのは、調和振動子がいくらでも高いエネルギー準位を持てるからであろう。
