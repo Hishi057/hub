@@ -125,7 +125,11 @@ $$
 
 $\varphi_0$,$\theta_0$は初期条件の定数として、解析解は次の通りである。
 $$
-\therefore q_x(t) = \varphi_0 \cos\left( \sqrt{\frac{\alpha^{(k)}}{m}} t + \theta_0 \right) \xi_x^{(k)}
+\therefore q_x(t) = \varphi_0 \cos\left( w(k) t + \theta_0 \right) \xi_x^{(k)}
+
+\qquad
+
+w(k) \coloneqq \sqrt{\frac{\alpha^{(k)}}{m}}
 $$
 
 ところでだが、元々の運動方程式は線形微分方程式であるから、今求めた解を異なる$k$について足し合わせて、最終的に一般解を以下のように表すことが出来る。
@@ -141,10 +145,101 @@ $$
 \xi_x^{(k)} = \sqrt{\frac{2}{N+1}} \sin(kx) \\ 
 \alpha^{(k)} = 4K \left( \sin \frac{ak}{2} \right)^2 
 \end{cases}
+\\
+\therefore w(k) = 2\sqrt{\frac{\kappa}{m}}\sin{\frac{ak}{2}}
 $$
 
-最終的なハミルトニアンはこうなる。
+教科書において、固有ベクトルの導出はやや天下りになっている。
+固有ベクトルは$e^{i\theta}$を含む形になっているとまず予測され、実際に整合性がとれることを確認したのでokという構成になっている。
+両端の粒子を固定しているという条件を取り入れるために$x=0, (N+1)a$で$q_x = 0$とすると、$e^{i\theta}$が$\sin$に決定される。
+
+解析力学を用いると、最終的なハミルトニアンはこうなる。
 
 $$
-H(Q, P) = \sum_{k \in \mathcal{K}} \left( \frac{P_k^2}{2m} + \frac{1}{2} m \omega_k^2 Q_k^2 \right)
+\begin{aligned}
+\psi_k &= \frac{\partial L(\boldsymbol{\varphi}, \dot{\boldsymbol{\varphi}})}{\partial \dot{\varphi}_k} 
+\\
+&= m \dot{\varphi}_k 
+\\
+&= m \sum_{x \in \mathcal{X}} \xi_x^{(k)} \dot{q}_x 
+\\
+&= \sum_{x \in \mathcal{X}} \xi_x^{(k)} p_x 
+\end{aligned}
 $$
+
+$$
+\begin{aligned}
+H(\boldsymbol{\varphi}, \boldsymbol{\psi}) &\coloneqq \sum_{k \in \mathcal{K}} \psi_k \dot{\varphi}_k - L(\boldsymbol{\varphi}, \dot{\boldsymbol{\varphi}}) = \sum_{k \in \mathcal{K}} \left\{ \frac{1}{2m} (\psi_k)^2 + \frac{\alpha^{(k)}}{2} (\varphi_k)^2 \right\} \\
+
+&= \sum_{k \in \mathcal{K}} \frac{1}{2m} \left\{ (\psi_k)^2 + m^2 (\omega(k))^2 (\varphi_k)^2 \right\}
+\end{aligned}
+$$
+
+### 三次元の結晶
+
+前節の結論を一般化すると、三次元における振動数は次のようになる。
+
+$$
+\omega(\vec{k}) = 2 \sqrt{\frac{\kappa}{m}} \sqrt{ \left(\sin \frac{a k_x}{2}\right)^2 + \left(\sin \frac{a k_y}{2}\right)^2 + \left(\sin \frac{a k_z}{2}\right)^2 }
+$$
+
+よって、調和振動子1つのエネルギー期待値を自由度$3N$の分だけかければよろしい。
+
+$$
+\langle \hat{H} \rangle_\beta^{\text{can}} = 3 \sum_{\vec{k} \in \mathcal{K}} \left( \frac{\hbar \omega(\vec{k})}{2} + \frac{\hbar \omega(\vec{k})}{e^{\beta \hbar \omega(\vec{k})} - 1} \right)
+\\
+= E_0 + 3 \sum_{\vec{k} \in \mathcal{K}} \frac{\hbar \omega(\vec{k})}{e^{\beta \hbar \omega(\vec{k})} - 1} \qquad \left( E_0 \coloneqq 3 \sum_{\vec{k} \in \mathcal{K}} \frac{\hbar \omega(\vec{k})}{2} \right)
+$$
+
+$$\hbar \omega(\vec{k}) \ll k_B T \iff \beta \hbar \omega(\vec{k}) \ll 1 \quad \text{のとき、} \quad \langle \hat{H} \rangle_\beta^{\text{can}} \to 3 N k_B T$$
+
+以上のように、デュロン・プティの法則が成り立っていることが確認できる。
+
+次に、低温状態$\hbar \omega(\vec{k}) \gg k_B T \iff \beta \hbar \omega(\vec{k}) \gg 1 $ における比熱について考える。
+
+まず、低温状態において$sinx \simeq x$を用いると
+
+$$
+\omega(\vec{k}) \simeq \sqrt{\frac{\kappa}{m}}a|\vec{k}| = v_0 |\vec{k}|
+$$
+
+が得られる。これを元に、エネルギー期待値の式変形を行なっていく。
+次の式変形は中々ハードである。
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{\text{can}} &= E_0 + \frac{3V_0}{\pi^3} \int_{0}^{\frac{\pi}{a}} d^3k \frac{\hbar \omega(\vec{k})}{e^{\beta \hbar \omega(\vec{k})} - 1}
+\\
+&= E_0 + \frac{3V_0}{8\pi^3} \int_{-\frac{\pi}{a}}^{\frac{\pi}{a}} d^3k \frac{\hbar \omega(\vec{k})}{e^{\beta \hbar \omega(\vec{k})} - 1}
+\\
+&\simeq E_0 + \frac{3V_0}{8\pi^3} \int_{0}^{\infty} 4\pi k^2 dk \frac{\hbar \omega(\vec{k})}{e^{\beta \hbar \omega(\vec{k})} - 1}
+\end{aligned}
+$$
+
+結果にあまり影響を及ぼさないので、積分範囲を広くした。 $x = \hbar \beta v_0 k $ で置換を行う。
+
+$$
+\begin{aligned}
+\langle \hat{H} \rangle_\beta^{\text{can}} &= E_0 + \frac{3V_0}{2\pi^2} \cdot \frac{1}{\hbar^3 \beta^3 v_0^3} \int_{0}^{\infty} \frac{dx}{\hbar \beta v_0} \cdot \frac{(\hbar \beta v_0 k)^3}{e^{\hbar \beta v_0 k} - 1}
+\\
+&= E_0 + \frac{3V_0}{2\pi^2 \hbar^3 \beta^4 v_0^3} \int_{0}^{\infty} dx \frac{x^3}{e^x - 1} \qquad \left( \because \int_{0}^{\infty} \frac{x^3}{e^x - 1} dx = \frac{\pi^4}{15} \right)
+\\
+&= E_0 + \frac{\pi^2 V_0}{10 \hbar^3 v_0^3} \cdot (k_B T)^4
+\end{aligned}
+$$
+
+$$
+\therefore c(T) = \frac{d}{dT} \langle \hat{H} \rangle_\beta^{\text{can}} = \frac{2\pi^2 k_B^4 V_0}{5\hbar^3 v_0^3} T^3
+$$
+
+よって、低温状態のときに比熱が$T^3$のオーダーで減少していくことが示された。
+
+ところで、複雑な計算を行ったがオーダーだけなら、実はこれが成り立つ理由は極めて雑な近似によってでも考えることが出来る。
+
+低温状態でも、$\hbar \omega(\vec{k}) \leq k_B T$となって「生き残って」振動している粒子がいくつかは存在しているはずである。
+$$
+\hbar \omega(\vec{k}) = \hbar v_0k \leq k_B T \\
+\therefore k \leq \frac{k_B T}{\hbar v_0}
+$$
+これは、原点から半径$k$以内に存在する粒子が「生き残る」ことを表している。その$k$は$T$に比例するから、
+三次元において「生き残る」粒子の数は$T^3$に比例すると考えられる。
