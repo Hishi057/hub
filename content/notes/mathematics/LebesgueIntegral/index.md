@@ -10,8 +10,10 @@ title: ルベーグ積分論
 
 ---
 
-[1. 外測度・測度](./Measure.md)
+[1. 外測度・測度](./measure.md)
 
-[2. ルベーグ積分](./LebesgueIntegral.md)
+[2. ルベーグ積分](./lebesgueintegral.md)
 
-[3. 収束定理](./ConvergenceTheorem.md)
+[3. 収束定理](./convergencetheorem.md)
+
+[4. フビニの定理](./fubini.md)

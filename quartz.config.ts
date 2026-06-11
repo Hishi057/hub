@@ -1,6 +1,10 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
+const isPublicBuild =
+  process.env.GITHUB_ACTIONS === "true" && process.env.QUARTZ_PUBLIC_BUILD === "true"
+const publicOnlyIgnorePatterns = isPublicBuild ? ["private", "books", "english"] : []
+
 /**
  * Quartz 4 Configuration
  *
@@ -17,7 +21,7 @@ const config: QuartzConfig = {
     },
     locale: "ja-JP",
     baseUrl: "hishi057.github.io/hub",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["templates", ".obsidian", ...publicOnlyIgnorePatterns],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
