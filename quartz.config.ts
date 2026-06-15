@@ -3,7 +3,7 @@ import * as Plugin from "./quartz/plugins"
 
 const isPublicBuild =
   process.env.GITHUB_ACTIONS === "true" && process.env.QUARTZ_PUBLIC_BUILD === "true"
-const publicOnlyIgnorePatterns = isPublicBuild ? ["private", "books", "english"] : []
+const publicOnlyIgnorePatterns = isPublicBuild ? ["private", "books", "notes/english","notes/other"] : []
 
 /**
  * Quartz 4 Configuration
