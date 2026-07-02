@@ -282,3 +282,413 @@ $\tilde{a}(x) = \sum{(\tilde{a}, \varphi_n)}_{L^2([-1,1])} \varphi_n(x)$
 と、$L^2([-1,1])$上で展開できる
 
 次回、偶奇に着目して$(\tilde{a}, \varphi_n)_{L^2([-1,1])}$を計算
+
+## 第6回 (AI整理)
+
+### ヒルベルト空間と完全正規直交系
+
+$H$ をヒルベルト空間とし、$\{\varphi_n\}_{n=1}^{\infty} \subset H$ を正規直交系 (orthonormal system; ONS) とする。
+
+すなわち
+
+$$
+(\varphi_n,\varphi_m)_H=\delta_{nm}
+$$
+
+が成り立つとする。
+
+このとき、任意の $n$ について
+
+$$
+(h,\varphi_n)_H=0
+$$
+
+を満たす $h\in H$ が $h=0$ に限られるならば、$\{\varphi_n\}_{n=1}^{\infty}$ を **完全正規直交系** (complete orthonormal system; CONS) という。
+
+言い換えると、CONS とは「すべての $\varphi_n$ に直交する方向が、もはや $0$ しか残っていない」ような正規直交系である。
+
+### 完全性とフーリエ展開
+
+**命題**
+
+$\{\varphi_n\}_{n=1}^{\infty}$ をヒルベルト空間 $H$ の正規直交系とする。このとき、次は同値である。
+
+1. $\{\varphi_n\}_{n=1}^{\infty}$ は完全である。
+2. 任意の $f\in H$ に対して
+
+$$
+f=\sum_{n=1}^{\infty}(f,\varphi_n)_H\varphi_n
+\quad \text{in } H
+$$
+
+が成り立つ。
+
+ここで右辺は、$H$ のノルムに関する収束として解釈する。
+
+**証明**
+
+まず、2 から 1 を示す。
+
+$h\in H$ が
+
+$$
+(h,\varphi_n)_H=0
+\quad (n=1,2,\ldots)
+$$
+
+を満たすとする。仮定 2 より
+
+$$
+h=\sum_{n=1}^{\infty}(h,\varphi_n)_H\varphi_n=0
+$$
+
+となる。したがって $\{\varphi_n\}$ は完全である。
+
+次に、1 から 2 を示す。$f\in H$ に対して
+
+$$
+f_N:=\sum_{n=1}^{N}(f,\varphi_n)_H\varphi_n
+$$
+
+とおく。正規直交系に対する一般論から、$\{f_N\}$ は $H$ で収束し、その極限を
+
+$$
+f_\infty:=\lim_{N\to\infty}f_N
+$$
+
+と書く。
+
+固定した $m$ に対して、$N\ge m$ ならば
+
+$$
+(f_N,\varphi_m)_H
+=\sum_{n=1}^{N}(f,\varphi_n)_H(\varphi_n,\varphi_m)_H
+=(f,\varphi_m)_H
+$$
+
+である。$N\to\infty$ とすると
+
+$$
+(f_\infty,\varphi_m)_H=(f,\varphi_m)_H
+$$
+
+だから
+
+$$
+(f-f_\infty,\varphi_m)_H=0
+\quad (m=1,2,\ldots)
+$$
+
+となる。完全性より $f-f_\infty=0$ である。したがって
+
+$$
+f=\sum_{n=1}^{\infty}(f,\varphi_n)_H\varphi_n
+\quad \text{in } H
+$$
+
+が従う。
+
+### $L^2([-1,1])$ 上の三角関数系
+
+次に、区間 $[-1,1]$ 上の $L^2$ 空間で基本となる完全正規直交系を考える。
+
+$$
+\varphi_0(x):=\frac{1}{\sqrt{2}},
+\quad
+\varphi_{2n-1}(x):=\sin(n\pi x),
+\quad
+\varphi_{2n}(x):=\cos(n\pi x)
+\quad (n=1,2,\ldots)
+$$
+
+と定める。
+
+**定理**
+
+$$
+\{\varphi_n\}_{n=0}^{\infty}
+$$
+
+は $L^2([-1,1])$ の完全正規直交系である。
+
+正規直交性は、三角関数の直交関係
+
+$$
+\int_{-1}^{1}\sin(n\pi x)\sin(m\pi x)\,dx=\delta_{nm},
+$$
+
+$$
+\int_{-1}^{1}\cos(n\pi x)\cos(m\pi x)\,dx=\delta_{nm},
+$$
+
+$$
+\int_{-1}^{1}\sin(n\pi x)\cos(m\pi x)\,dx=0
+$$
+
+および
+
+$$
+\int_{-1}^{1}\frac{1}{\sqrt{2}}\frac{1}{\sqrt{2}}\,dx=1
+$$
+
+から確認できる。したがって、残る問題は完全性である。
+
+### 完全性の証明 1: 連続関数の場合
+
+まず
+
+$$
+h\in C([-1,1])
+$$
+
+かつ
+
+$$
+h\perp \varphi_n
+\quad (n=0,1,2,\ldots)
+$$
+
+を仮定し、$h\equiv 0$ を示す。
+
+背理法で、ある点で $h$ が $0$ でないと仮定する。必要ならば $-h$ を考えることで、ある $x_0\in(-1,1)$ と $\alpha>0,\delta>0$ が存在して
+
+$$
+[x_0-\delta,x_0+\delta]\subset(-1,1)
+$$
+
+かつ
+
+$$
+h(x)>\alpha
+\quad
+(x\in[x_0-\delta,x_0+\delta])
+$$
+
+となるようにできる。
+
+ここで
+
+$$
+g(x):=\cos(\pi(x-x_0))+1-\cos(\pi\delta)
+$$
+
+とおく。$\delta$ は必要なら小さく取り直してよい。この $g$ は、$x_0$ の近くでは $1$ より大きく、そこから離れたところでは絶対値が $1$ 以下になるように作った関数である。
+
+具体的には、ある $0<\delta'<\delta$ が存在して
+
+$$
+g(x)\ge 1+\frac{\varepsilon}{2}
+\quad
+(x\in[x_0-\delta',x_0+\delta'])
+$$
+
+となり、また
+
+$$
+|g(x)|\le 1
+\quad
+(x\in[-1,1]\setminus[x_0-\delta,x_0+\delta])
+$$
+
+が成り立つ。ただし
+
+$$
+\varepsilon:=1-\cos(\pi\delta)>0
+$$
+
+とおいた。
+
+$g$ は $\sin(n\pi x)$, $\cos(n\pi x)$ および定数の有限線形結合で書ける。さらに、加法定理や積和公式を用いれば、$g^N$ も同じ三角関数系の有限線形結合で書ける。
+
+したがって、$h$ がすべての $\varphi_n$ に直交することから
+
+$$
+(h,g^N)_{L^2}=0
+\quad
+(N=1,2,\ldots)
+$$
+
+である。
+
+一方、積分を分けて評価すると
+
+$$
+\begin{aligned}
+(h,g^N)_{L^2}
+&=\int_{-1}^{1}h(x)g(x)^N\,dx \\
+&\ge
+\int_{x_0-\delta'}^{x_0+\delta'}h(x)g(x)^N\,dx
+-
+\int_{[-1,1]\setminus[x_0-\delta,x_0+\delta]}|h(x)|\,|g(x)|^N\,dx \\
+&\ge
+2\alpha\delta'\left(1+\frac{\varepsilon}{2}\right)^N
+-2\max_{[-1,1]}|h|.
+\end{aligned}
+$$
+
+右辺は $N\to\infty$ で $+\infty$ に発散する。これは $(h,g^N)_{L^2}=0$ に矛盾する。
+
+よって、連続関数 $h$ が三角関数系すべてに直交するならば、$h\equiv 0$ である。
+
+### 完全性の証明 2: $L^2$ 関数の場合
+
+次に
+
+$$
+h\in L^2([-1,1])
+$$
+
+かつ
+
+$$
+h\perp \varphi_n
+\quad
+(n=0,1,2,\ldots)
+$$
+
+を仮定し、$h=0$ a.e. を示す。
+
+関数
+
+$$
+g(x):=\int_{-1}^{x}h(y)\,dy
+$$
+
+を定める。$h\in L^2([-1,1])$ なので、Hölder の不等式より
+
+$$
+\int_{-1}^{1}|h(y)|\,dy
+\le
+\left(\int_{-1}^{1}|h(y)|^2\,dy\right)^{1/2}
+\left(\int_{-1}^{1}1^2\,dy\right)^{1/2}
+<\infty
+$$
+
+であり、$g$ は well-defined である。さらに、ルベーグ積分の基本性質から $g\in C([-1,1])$ であり、部分積分ができる。
+
+まず、$h\perp \varphi_0$ より
+
+$$
+g(-1)=0,
+\quad
+g(1)=\int_{-1}^{1}h(y)\,dy=0
+$$
+
+である。
+
+$n=1,2,\ldots$ に対して部分積分すると
+
+$$
+\begin{aligned}
+(g,\sin(n\pi\cdot))_{L^2}
+&=\int_{-1}^{1}g(x)\sin(n\pi x)\,dx \\
+&=\left[g(x)\left(-\frac{\cos(n\pi x)}{n\pi}\right)\right]_{-1}^{1}
++\frac{1}{n\pi}\int_{-1}^{1}h(x)\cos(n\pi x)\,dx \\
+&=0.
+\end{aligned}
+$$
+
+同様に
+
+$$
+(g,\cos(n\pi\cdot))_{L^2}=0
+$$
+
+も成り立つ。
+
+ただし、$g$ は定数関数に直交しているとは限らない。そこで平均を引いて
+
+$$
+\widetilde{g}(x)
+:=
+g(x)-\frac{1}{2}\int_{-1}^{1}g(y)\,dy
+$$
+
+とおく。このとき
+
+$$
+\begin{aligned}
+\left(\widetilde{g},\frac{1}{\sqrt{2}}\right)_{L^2}
+&=\frac{1}{\sqrt{2}}\int_{-1}^{1}
+\left(
+g(x)-\frac{1}{2}\int_{-1}^{1}g(y)\,dy
+\right)\,dx \\
+&=\frac{1}{\sqrt{2}}\int_{-1}^{1}g(x)\,dx
+-\frac{1}{\sqrt{2}}\int_{-1}^{1}g(y)\,dy \\
+&=0.
+\end{aligned}
+$$
+
+また、定数を引いても $\sin(n\pi x)$ や $\cos(n\pi x)$ への直交性は保たれるので、
+
+$$
+\widetilde{g}\perp \varphi_n
+\quad
+(n=0,1,2,\ldots)
+$$
+
+である。さらに $\widetilde{g}\in C([-1,1])$ である。
+
+連続関数の場合の結果を適用すると
+
+$$
+\widetilde{g}\equiv 0
+$$
+
+である。したがって $g$ は定数関数である。ところが $g(-1)=0$ なので
+
+$$
+g\equiv 0
+$$
+
+となる。
+
+ゆえに、ほとんど至るところで
+
+$$
+h(x)=g'(x)=0
+$$
+
+である。以上より、三角関数系 $\{\varphi_n\}_{n=0}^{\infty}$ は $L^2([-1,1])$ の完全正規直交系である。
+
+### 奇拡張と次回への準備
+
+$a\in L^2([0,1])$ とする。このとき、$a$ の奇拡張を
+
+$$
+\widetilde{a}(x)
+:=
+\begin{cases}
+a(x), & 0\le x\le 1,\\
+-a(-x), & -1\le x<0
+\end{cases}
+$$
+
+で定めると、
+
+$$
+\widetilde{a}\in L^2([-1,1])
+$$
+
+である。
+
+したがって、上で示した完全正規直交系によって
+
+$$
+\widetilde{a}
+=
+\sum_{n=0}^{\infty}
+(\widetilde{a},\varphi_n)_{L^2([-1,1])}\varphi_n
+\quad
+\text{in } L^2([-1,1])
+$$
+
+と展開できる。
+
+次回は、$\widetilde{a}$ が奇関数であることに注目して、
+
+$$
+(\widetilde{a},\varphi_n)_{L^2([-1,1])}
+$$
+
+を具体的に計算する。
