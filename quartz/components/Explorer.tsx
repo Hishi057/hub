@@ -32,6 +32,11 @@ const defaultOptions: Options = {
   sortFn: (a, b) => {
     // Sort order: folders first, then files. Sort folders and files alphabeticall
     if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+      // Keep the automaton introduction at the top of its folder.
+      const pinnedSlug = "notes/conputerscience/automaton/introduction"
+      if (a.slug === pinnedSlug) return -1
+      if (b.slug === pinnedSlug) return 1
+
       // numeric: true: Whether numeric collation should be used, such that "1" < "2" < "10"
       // sensitivity: "base": Only strings that differ in base letters compare as unequal. Examples: a ≠ b, a = á, a = A
       return a.displayName.localeCompare(b.displayName, undefined, {
