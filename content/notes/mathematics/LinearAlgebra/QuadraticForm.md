@@ -4,7 +4,7 @@ title: 二次形式
 
 ## 前提知識
 
-[[notes/LinearAlgebra/Basics#固有値|固有値]] 固有値が重要となる。
+[固有値](eigen_value.md) 固有値が重要となる。
 
 ## 概要
 

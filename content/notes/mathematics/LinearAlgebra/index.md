@@ -13,3 +13,13 @@ title: 線形代数
 
 ## 記事一覧
 
+[1. 基本操作](./basics.md)  
+[2. 行列式](./determinant.md)  
+[3. 固有値](./eigen_value.md)  
+[4. ベクトル空間](./vector_space.md)  
+[5. 線形写像](./liner_mapping.md)  
+[6. 表現行列](./represantation_matrix.md)  
+[7. 二次形式](./quadraticform.md)  
+
+[A. 用語整理](./terms.md)  
+[B. 特異値分解](./SVD.md)  
