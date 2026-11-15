@@ -13,6 +13,59 @@ bimodal分岐予測とは、`PC`(命令アドレス)の一部をindexとして�
 
 `PHT`カウンタが$0$or$1$のときに分岐不成立、$2$or$3$のときに分岐成立と予測する。
 
+また通常、`BHT`の(`PHT`でも用いた)各indexに、前回の分岐先を記録する。
+
+```c
+// 予測
+void bp_predict(unsigned int pc, int *pred, unsigned int *p_target){
+    // 分岐先を引っ張っておく
+    int btb_idx = (pc>>2) % BTB_SIZE;
+    *p_target = btb[btb_idx];
+
+    // PHTを元に、分岐の予測を行う
+    int pht_idx = (pc>>2) % PHT_SIZE;
+    *pred = (btb[btb_idx]!=0 && (pht[pht_idx] >> 1));
+}
+
+// 分岐判定完了後の処理
+void bp_regist(unsigned int pc, int taken, unsigned int target){
+    // 分岐先を記録しておく
+    int btb_idx = (pc>>2) % BTB_SIZE;
+    btb[btb_idx] = target;
+
+    // 実際の分岐結果を元に、PHTを更新
+    int pht_idx = (pc>>2) % PHT_SIZE;
+    pht[pht_idx] = (taken) ? pht[pht_idx] + (pht[pht_idx]<3) :
+                             pht[pht_idx] - (pht[pht_idx]>0);
+}
+```
+
 ## gshare
 
 基本的な考え方はbimodal方式と同じだが、`PHT`のindexとして、`PC`(命令アドレス)の一部だけでなく、過去n回分の分岐結果を記録した`GHR`との排他的論理和を用いる。
+
+```c
+void bp_predict(unsigned int pc, int *pred, unsigned int *p_target){
+    // 分岐先を引っ張っておく
+    int btb_idx = (pc>>2) % BTB_SIZE;
+    *p_target = btb[btb_idx];
+
+    // PHTとGHRを元に、分岐の予測を行う
+    int pht_idx = (pc>>2) % PHT_SIZE ^ ghr;
+    *pred = (btb[btb_idx]!=0 && (pht[pht_idx] >> 1));
+}
+
+void bp_regist(unsigned int pc, int taken, unsigned int target){
+    // 分岐先を記録しておく
+    int btb_idx = (pc >> 2) % BTB_SIZE;
+    btb[btb_idx] = target;
+
+    // 実際の分岐結果を元に、PHTを更新
+    int pht_idx = (pc>>2) % PHT_SIZE ^ ghr;
+    pht[pht_idx] = (taken) ? pht[pht_idx] + (pht[pht_idx]<3) :
+                             pht[pht_idx] - (pht[pht_idx]>0);
+
+    // GHRの更新
+    ghr = ((ghr << 1) | taken) & (GHR_SIZE - 1);
+}
+```
